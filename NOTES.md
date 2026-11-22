@@ -91,6 +91,27 @@ Scikit-learn (`sklearn`) follows the same pattern across all algorithms:
   * Perfect on training data, terrible on validation data.
 * **The Sweet Spot (`max_leaf_nodes`)**:
   * We use a loop over candidate leaf counts `[5, 25, 50, 100, 250, 500]` to test validation MAE.
-  * The sweet spot occurs at **100 leaves** (minimum MAE: \$27,282 on Iowa dataset).
+  * The sweet spot occurs at **100 leaves** (Iowa data) / **500 leaves** (Melbourne data).
 * **Final Model Retraining**:
-  * After determining that `100` leaves is optimal, retrain the final model on **100% of data (`X, y`)** so it has maximum knowledge for deployment.
+  * After determining the optimal leaf count, retrain on **100% of data (`X, y`)** for maximum knowledge in production.
+
+---
+
+## 6. Random Forests (Ensemble Learning)
+
+* **The Concept**:
+  * Instead of relying on a single tree (which easily underfits or overfits), a **Random Forest** builds dozens or hundreds of decision trees (by default 100).
+  * It takes the **average** of all their individual predictions ("Wisdom of the Crowd").
+* **Why "Random"?**:
+  * Each tree trains on a random subsample of the data and a random subset of features.
+  * Individual tree biases cancel out, dramatically improving accuracy.
+* **Scikit-Learn Implementation**:
+  ```python
+  from sklearn.ensemble import RandomForestRegressor
+  rf_model = RandomForestRegressor(random_state=1)
+  rf_model.fit(train_X, train_y)
+  rf_preds = rf_model.predict(val_X)
+  rf_mae = mean_absolute_error(val_y, rf_preds)
+  ```
+* **Performance Gain**:
+  * On the Iowa dataset, MAE dropped from **\$27,282** (best single tree) down to **\$21,857** (Random Forest) — an instant \$5,400+ improvement with zero hyperparameter tuning required!
