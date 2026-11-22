@@ -1,6 +1,6 @@
 # Machine Learning Course - Concept Notes & Knowledge Base
 
-This document contains a structured, concept-by-concept record of everything covered so far in the Kaggle Machine Learning track.
+This document contains a structured, concept-by-concept record of everything covered in the Kaggle Machine Learning track.
 
 ---
 
@@ -108,10 +108,26 @@ Scikit-learn (`sklearn`) follows the same pattern across all algorithms:
 * **Scikit-Learn Implementation**:
   ```python
   from sklearn.ensemble import RandomForestRegressor
-  rf_model = RandomForestRegressor(random_state=1)
+  rf_model = RandomForestRegressor(n_estimators=100, random_state=1)
   rf_model.fit(train_X, train_y)
   rf_preds = rf_model.predict(val_X)
   rf_mae = mean_absolute_error(val_y, rf_preds)
   ```
 * **Performance Gain**:
   * On the Iowa dataset, MAE dropped from **\$27,282** (best single tree) down to **\$21,857** (Random Forest) — an instant \$5,400+ improvement with zero hyperparameter tuning required!
+
+---
+
+## 7. Machine Learning Competitions & Real-World Submissions
+
+* **The Competition Workflow**:
+  1. `train.csv`: Labeled training data (has `SalePrice`).
+  2. `test.csv`: 1,459 unseen houses with hidden sale prices.
+  3. Fit final model on 100% of `train.csv`.
+  4. Generate predictions on `test.csv` (`test_preds = model.predict(test_X)`).
+  5. Format output into `submission.csv` (`Id, SalePrice`).
+* **First Competition Result**:
+  * **Competitor**: Shlok Shah
+  * **Competition**: Housing Prices Competition for Kaggle Learn Users
+  * **Public Score**: **17860.00818**
+  * **Rank**: **#1,593** on the Global Leaderboard (out of 3,630+ participants worldwide)!
