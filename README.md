@@ -1,5 +1,9 @@
 # Kaggle: Intro to Machine Learning
 
+<p align="center">
+  <img src="certificate.png" alt="Kaggle Intro to Machine Learning Certificate" width="700"/>
+</p>
+
 Code, notes, and competition submission from completing Kaggle's **Intro to Machine Learning** certification track.
 
 ---
