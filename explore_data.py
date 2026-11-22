@@ -4,9 +4,20 @@ import pandas as pd
 melbourne_file_path = 'data/melb_data.csv'
 melbourne_data = pd.read_csv(melbourne_file_path)
 
-# Exploratory Data Analysis (EDA)
-print("--- Columns in Dataset ---")
-print(melbourne_data.columns)
+# Step 2: Clean missing values (dropna)
+filtered_melbourne_data = melbourne_data.dropna(axis=0)
 
-print("\n--- Summary Statistics ---")
-print(melbourne_data.describe())
+# Choose target variable (y = what we want to predict)
+y = filtered_melbourne_data.Price
+
+# Choose feature columns (X = clues to make predictions)
+melbourne_features = [
+    'Rooms', 'Bathroom', 'Landsize', 'BuildingArea', 
+    'YearBuilt', 'Lattitude', 'Longtitude'
+]
+X = filtered_melbourne_data[melbourne_features]
+
+print("Features selected for X:")
+print(X.head())
+print("\nTarget y (Price):")
+print(y.head())
